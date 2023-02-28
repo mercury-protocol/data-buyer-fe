@@ -4,24 +4,12 @@
       <div class="row">
         <div class="col">
           <div class="dropdown">
-            <a
-              class="btn btn-primary dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Data type
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <button
-              type="button"
-                class="dropdown-item"
-                @click="dataTypeSelect"
-                value="1"
-              >
+              <button type="button" class="dropdown-item" @click="dataTypeSelect" value="1">
                 Browsing
               </button>
               <button type="button" class="dropdown-item" @click="dataTypeSelect" value="2">

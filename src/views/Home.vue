@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <Header />
-        <DataBuyerAddress :ethers="this.ethers"/>
-        <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers"/>
+        <DataBuyerAddress :ethers="this.ethers" />
+        <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
     </div>
 </template>
 
@@ -36,14 +36,17 @@ export default {
 <style>
 html,
 body {
-      background-color: #061735 !important;
+    background-color: #061735 !important;
 }
+
 .container {
     margin-top: 30px;
 }
+
 p {
-      color: #40eeec;
+    color: #40eeec;
 }
+
 input {
     background-color: transparent;
     color: #40eeec;
