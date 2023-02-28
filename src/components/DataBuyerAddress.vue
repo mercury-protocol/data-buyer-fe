@@ -3,8 +3,11 @@
     <div v-if="!this.buyerAddrSet">
       <p>Please set your deployed data buyer instance:</p>
       <span>
-        <input type="text" class="buyer-addr-input" v-model="buyerAddrInput" />
-        <button class="btn btn-primary" @click="setClick">Set</button>
+        <InputText type="text" class="pt-10 buyer-addr-input" v-model="buyerAddrInput" />
+        <Button class="btn btn-primary" @click="setClick">Set</button>
+        <h1 className="text-3xl font-bold underline">
+          Hello world!
+        </h1>
       </span>
     </div>
     <div v-if="this.buyerAddrSet">

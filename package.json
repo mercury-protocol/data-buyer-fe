@@ -15,6 +15,8 @@
     "ethers": "^5.7.2",
     "keccak256": "^1.0.6",
     "node-polyfill-webpack-plugin": "^2.0.1",
+    "primeicons": "^6.0.1",
+    "primevue": "^3",
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -24,8 +26,11 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "autoprefixer": "^10.4.13",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7"
   },
   "eslintConfig": {
     "root": true,
