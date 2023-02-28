@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import Cypher from "../services/cypher";
+
 export default {
   name: "CreateOrder",
   data() {
@@ -42,6 +44,7 @@ export default {
       price: 0,
       units: 0,
       selectedDataType: "",
+      cypher: new Cypher,
     };
   },
   props: {
@@ -54,6 +57,15 @@ export default {
 
     async createOrder(e) {
       e.preventDefault();
+      // console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
+
+      // console.log('cypher', this.cypher); // Check if cypher is defined
+      console.log('sigenr', this.ethers.address); // Check if signer is defined
+      console.log('price', this.price); // Check if price is defined
+
+      const enoughBalance = this.cypher.checkBalance(this.ethers.address, this.price * this.units);
+      if (!enoughBalance)
+        return;
       await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
     },
   },
