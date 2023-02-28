@@ -29,12 +29,14 @@ export default {
     ethers: Object,
   },
   methods: {
-    setClick() {
+    async setClick() {
       console.log(this.buyerAddrInput);
-      this.buyerAddrSet = this.ethers.setDataBuyerInstanceAddress(
+      this.buyerAddrSet = await this.ethers.setDataBuyerInstanceAddress(
         this.buyerAddrInput
       );
+      if (!this.buyerAddrSet)
+        this.buyerAddrInput = "";
     },
-  },
-};
+  }
+}
 </script>
