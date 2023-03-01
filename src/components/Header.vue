@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <img class="img-fluid" src="../assets/mcy.png" alt="">
+    <div class="h-10 md:h-16 pl-4 pr-4 pb-4">
+        <img class="h-full" src="../assets/mcy.png" alt="">
     </div>
 </template>
 
@@ -10,9 +10,3 @@ export default {
     name: "Header",
 }
 </script>
-
-<style scoped>
-.img-fluid {
-    width: 20%;
-}
-</style>

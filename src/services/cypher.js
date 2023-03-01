@@ -25,8 +25,8 @@ class Cypher {
       targetChainIdHex: "0x5", // goerli
       requiredTokenBalance: requiredTokenBalance, // Required: Token Value Required with respect to native currency or token value
       isTestnet: true, // Optional: enable testnet for developer testing
-      requiredTokenContractAddress:
-        "0x509Ee0d083DdF8AC028f2a56731412edD63223B9",
+      // requiredTokenContractAddress:
+      //   "0x509Ee0d083DdF8AC028f2a56731412edD63223B9",
       callBack: (success) => {
         // Optional
         if (success) {

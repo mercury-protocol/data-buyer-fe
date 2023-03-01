@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="mt-8 ml-4 mr-4">
         <Header />
         <DataBuyerAddress :ethers="this.ethers" />
         <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
@@ -37,10 +37,6 @@ export default {
 html,
 body {
     background-color: #061735 !important;
-}
-
-.container {
-    margin-top: 30px;
 }
 
 p {

@@ -1,34 +1,22 @@
 <template>
-  <div class="container d-flex justify-content-center">
+  <div class="text-center self-center">
     <form v-on:submit="createOrder">
-      <div class="row">
-        <div class="col">
-          <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Data type
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <button type="button" class="dropdown-item" @click="dataTypeSelect" value="1">
-                Browsing
-              </button>
-              <button type="button" class="dropdown-item" @click="dataTypeSelect" value="2">
-                Health
-              </button>
-            </div>
+      <div class="flex flex-col p-10">
+        <Dropdown v-model="selectedDataType" :options="dataTypes" option-label="name" placeholder="Select a Data Type"
+          class="md:ml-16 md:mr-16" />
+        <div class="flex flex-col md:flex-row">
+          <div class="pt-8 flex flex-col md:w-1/2 md:pl-16 md:pr-16">
+            <p class="pb-4">Price:</p>
+            <InputNumber class="text-center" :min="0" id="price" v-model="price" suffix=" MER" />
+          </div>
+          <div class="pt-8 flex flex-col md:w-1/2 md:pl-16 md:pr-16">
+            <p class="pb-4">Units:</p>
+            <InputNumber id="units" :min="0" v-model="units" />
           </div>
         </div>
-        <div class="col">
-          <p>Price:</p>
-          <input type="number" id="price" v-model="price" />
+        <div class="pt-12">
+          <Button type="submit" class="btn btn-primary">Create order</Button>
         </div>
-        <div class="col">
-          <p>Units:</p>
-          <input type="number" id="units" v-model="units" />
-        </div>
-      </div>
-      <div class="row">
-        <button type="submit" class="btn btn-primary">Create order</button>
       </div>
     </form>
   </div>
@@ -45,6 +33,9 @@ export default {
       units: 0,
       selectedDataType: "",
       cypher: new Cypher,
+      dataTypes: [
+        { name: 'Browsing', code: '1' },
+        { name: 'Health', code: '2' }]
     };
   },
   props: {
@@ -57,11 +48,6 @@ export default {
 
     async createOrder(e) {
       e.preventDefault();
-      // console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
-
-      // console.log('cypher', this.cypher); // Check if cypher is defined
-      console.log('sigenr', this.ethers.address); // Check if signer is defined
-      console.log('price', this.price); // Check if price is defined
 
       const enoughBalance = this.cypher.checkBalance(this.ethers.address, this.price * this.units);
       if (!enoughBalance)
@@ -71,9 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.row {
-  margin-top: 30px;
-}
-</style>

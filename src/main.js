@@ -14,7 +14,8 @@ import Button from "primevue/button";
 import InputNumber from "primevue/inputnumber";
 import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
-import InputText from "primevue/inputnumber";
+import InputText from "primevue/inputtext";
+import Dropdown from "primevue/dropdown";
 
 // Tailwind
 import "./main.css";
@@ -33,6 +34,7 @@ app
   .component("Button", Button)
   .component("InputNumber", InputNumber)
   .component("Toast", Toast)
-  .component("InputText", InputText);
+  .component("InputText", InputText)
+  .component("Dropdown", Dropdown);
 
 app.mount("#app");
