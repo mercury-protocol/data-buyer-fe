@@ -1,6 +1,7 @@
 const ethers = require("ethers");
 const buyerAbi = require("../abis/dataBuyer.json");
 const factoryAbi = require("../abis/mercuryFactory.json");
+import ToastComponent from "./toast";
 
 class Ethers {
   constructor() {
@@ -60,6 +61,8 @@ class Ethers {
       );
       return true;
     } else {
+      const toast = new ToastComponent();
+      toast.addMessage("warn", "RIP");
       alert("Not a valid address.");
       return false;
     }

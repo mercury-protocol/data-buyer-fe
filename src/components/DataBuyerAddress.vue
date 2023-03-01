@@ -4,8 +4,8 @@
       <p>Please set your deployed data buyer instance:</p>
       <div class="pt-10">
         <div>
-          <span class="pr-6">
-            <InputText type="text" v-model="buyerAddrInput" />
+          <span class="pr-6 w-1/4">
+            <InputText class="w-1/4" type="text" v-model="buyerAddrInput" />
           </span>
           <Button @click="setClick">Set</button>
         </div>

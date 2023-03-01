@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "@walletconnect/sign-client": "^2.4.6",
+    "@web3modal/standalone": "^2.1.2",
     "bootstrap": "^5.2.3",
     "bootstrap-vue-3": "^0.5.1",
     "core-js": "^3.8.3",
@@ -17,7 +19,8 @@
     "node-polyfill-webpack-plugin": "^2.0.1",
     "primeicons": "^6.0.1",
     "primevue": "^3",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "web3modal": "^1.9.12"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

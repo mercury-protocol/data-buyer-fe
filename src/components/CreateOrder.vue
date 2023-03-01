@@ -2,8 +2,8 @@
   <div class="text-center self-center">
     <form v-on:submit="createOrder">
       <div class="flex flex-col p-10">
-        <Dropdown v-model="selectedDataType" :options="dataTypes" option-label="name" placeholder="Select a Data Type"
-          class="md:ml-16 md:mr-16" />
+        <Dropdown v-model="selectedDataType" :options="dataTypes" optionLabel="name" optionValue="code"
+          placeholder="Select a Data Type" class="md:ml-16 md:mr-16" />
         <div class="flex flex-col md:flex-row">
           <div class="pt-8 flex flex-col md:w-1/2 md:pl-16 md:pr-16">
             <p class="pb-4">Price:</p>
