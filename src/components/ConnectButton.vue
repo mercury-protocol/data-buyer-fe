@@ -1,5 +1,7 @@
 <template>
-    <button :disabled="disabled" @click="connect">{{ buttonText }}</button>
+    <div class="w-1/2 pr-8 items-end">
+        <Button class="float-right p-button-outlined" :disabled="disabled" @click="connect" :label="buttonText" />
+    </div>
 </template>
   
 <script>
@@ -11,9 +13,9 @@ export default {
         return {
             disabled: true,
             buttonText: 'Initializing...',
-            projectId: '8e6b5ffdcbc9794bf9f4a1952578365b',
+            projectId: '67d1f7f27d715a4ffeb49e489586cc32',
             namespaces: {
-                eip155: { methods: ['eth_sign'], chains: ['eip155:1'], events: ['accountsChanged'] }
+                eip155: { methods: ['eth_sign'], chains: ['eip155:5'], events: ['accountsChanged'] }
             },
             web3Modal: null,
             signClient: null
@@ -28,6 +30,11 @@ export default {
         } catch (err) {
             console.error(err)
         }
+        this.web3modal.setTheme({
+            themeMode: "dark",
+            themeColor: "blue",
+            themeBackground: "themeColor",
+        });
     },
     methods: {
         async connect() {

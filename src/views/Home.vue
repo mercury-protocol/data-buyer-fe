@@ -1,6 +1,9 @@
 <template>
     <div class="mt-8 ml-4 mr-4">
-        <Header />
+        <div class="flex flex-row">
+            <Header class="w-1/2" />
+            <connect-button />
+        </div>
         <DataBuyerAddress :ethers="this.ethers" />
         <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
     </div>
@@ -11,12 +14,15 @@ import Header from "../components/Header.vue";
 import Ethers from "../services/ethers";
 import DataBuyerAddress from "../components/DataBuyerAddress.vue";
 import CreateOrder from "../components/CreateOrder.vue";
+import ConnectButton from '../components/ConnectButton.vue'
+
 
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Home",
     components: {
         Header,
+        ConnectButton,
         DataBuyerAddress,
         CreateOrder,
     },
@@ -28,7 +34,7 @@ export default {
     async mounted() {
         const ethers = new Ethers();
         this.ethers = ethers;
-        await ethers.connect();
+        // await ethers.connect();
     },
 }
 </script>

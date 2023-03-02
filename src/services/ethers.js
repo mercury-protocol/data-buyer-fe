@@ -1,7 +1,7 @@
 const ethers = require("ethers");
 const buyerAbi = require("../abis/dataBuyer.json");
 const factoryAbi = require("../abis/mercuryFactory.json");
-import ToastComponent from "./toast";
+// import ToastComponent from "./toast";
 
 class Ethers {
   constructor() {
@@ -42,11 +42,11 @@ class Ethers {
     });
   }
 
-  connect = async function () {
-    await this.provider.send("eth_requestAccounts", []);
-    this.address = await this.signer.getAddress();
-    console.log("Connected address is: ", this.address);
-  };
+  // connect = async function () {
+  //   await this.provider.send("eth_requestAccounts", []);
+  //   this.address = await this.signer.getAddress();
+  //   console.log("Connected address is: ", this.address);
+  // };
 
   setDataBuyerInstanceAddress = async function (addr) {
     if (ethers.utils.isAddress(addr)) {
@@ -61,8 +61,8 @@ class Ethers {
       );
       return true;
     } else {
-      const toast = new ToastComponent();
-      toast.addMessage("warn", "RIP");
+      // const toast = new ToastComponent();
+      // toast.addMessage("warn", "RIP");
       alert("Not a valid address.");
       return false;
     }
@@ -70,7 +70,7 @@ class Ethers {
 
   getDeployedDataBuyers = async function () {
     if (this.address == "") {
-      await this.connect();
+      // await this.connect();
     }
     try {
       const dataBuyers = await this.factory.dataBuyers(this.address, 0);

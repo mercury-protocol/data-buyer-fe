@@ -7,7 +7,7 @@
         <div class="flex flex-col md:flex-row">
           <div class="pt-8 flex flex-col md:w-1/2 md:pl-16 md:pr-16">
             <p class="pb-4">Price:</p>
-            <InputNumber class="text-center" :min="0" id="price" v-model="price" suffix=" MER" />
+            <InputNumber class="text-center" :min="0" id="price" v-model="price" suffix=" MCY" />
           </div>
           <div class="pt-8 flex flex-col md:w-1/2 md:pl-16 md:pr-16">
             <p class="pb-4">Units:</p>
