@@ -48,11 +48,21 @@ export default {
 
     async createOrder(e) {
       e.preventDefault();
+      try {
+        const enoughBalanceEther = await this.cypher.checkBalanceEther(this.ethers.address, 0.03);
+        if (!enoughBalanceEther)
+          throw new Error('Not enough balance Ethers');
+        const enoughBalanceERC20 = await this.cypher.checkBalanceERC20(this.ethers.address, this.price * this.units, '0x509Ee0d083DdF8AC028f2a56731412edD63223B9');
+        if (!enoughBalanceERC20)
+          throw new Error('Not enough balance ERC20');
+        await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
 
-      const enoughBalance = this.cypher.checkBalance(this.ethers.address, this.price * this.units);
-      if (!enoughBalance)
-        return;
-      await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
+      }
+      catch (err) {
+        console.log(err);
+
+      }
+
     },
   },
 };

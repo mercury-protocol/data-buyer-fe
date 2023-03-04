@@ -19,25 +19,31 @@ class Cypher {
       });
   }
 
-  checkBalance(_address, requiredTokenBalance) {
-    window.Cypher({
+  async checkBalanceEther(_address, requiredTokenBalance) {
+    const res = await window.Cypher({
       address: _address, // user wallet address
       targetChainIdHex: "0x5", // goerli
       requiredTokenBalance: requiredTokenBalance, // Required: Token Value Required with respect to native currency or token value
       isTestnet: true, // Optional: enable testnet for developer testing
       // requiredTokenContractAddress:
       //   "0x509Ee0d083DdF8AC028f2a56731412edD63223B9",
-      callBack: (success) => {
-        // Optional
-        if (success) {
-          alert("User wallet has a necessary token or currency");
-          return true;
-        } else {
-          alert("Failed to load user wallet necessary token or currency");
-          return false;
-        }
-      }, //
     });
+    return res;
+  }
+
+  async checkBalanceERC20(
+    _address,
+    requiredTokenBalance,
+    _requiredTokenContractAddress
+  ) {
+    const res = await window.Cypher({
+      address: _address, // user wallet address
+      targetChainIdHex: "0x5", // goerli
+      requiredTokenBalance: requiredTokenBalance, // Required: Token Value Required with respect to native currency or token value
+      isTestnet: true, // Optional: enable testnet for developer testing
+      requiredTokenContractAddress: _requiredTokenContractAddress,
+    });
+    return res;
   }
 }
 
