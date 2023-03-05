@@ -1,9 +1,11 @@
 <template>
     <div class="mt-8 ml-4 mr-4">
-        <Header />
+        <div class="grid grid-rows-1 grid-cols-2">
+            <Header class="mt-2 md:mt-0" />
+            <WalletConnect :provider="this.provider" :signer="this.signer" :ethers="this.ethers" />
+        </div>
         <DataBuyerAddress :ethers="this.ethers" />
         <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
-        <WalletConnect></WalletConnect>
     </div>
 </template>
 
@@ -26,13 +28,19 @@ export default {
     data() {
         return {
             ethers: Object,
+            provider: undefined,
+            signer: undefined
         }
     },
     async mounted() {
-        const ethers = new Ethers();
-        this.ethers = ethers;
-        await ethers.connect();
     },
+    methods: {
+        initEthers() {
+            const ethers = new Ethers();
+            this.ethers = ethers;
+        }
+
+    }
 }
 </script>
 

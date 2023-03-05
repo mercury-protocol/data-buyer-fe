@@ -3,11 +3,9 @@ const buyerAbi = require("../abis/dataBuyer.json");
 const factoryAbi = require("../abis/mercuryFactory.json");
 
 class Ethers {
-  constructor() {
-    this.provider = new ethers.providers.Web3Provider(window.ethereum);
-    this.signer = new ethers.providers.Web3Provider(
-      window.ethereum
-    ).getSigner();
+  constructor(wagmiProvider, wagmiSigner) {
+    this.provider = wagmiProvider;
+    this.signer = wagmiSigner;
     this.factory = new ethers.Contract(
       "0x6617514f164E4103706B3183eaF07cC669D6851F",
       factoryAbi,

@@ -1,30 +1,6 @@
 <template>
-    <div class="greetings">
-        <h3 class="mt-4">
-            This is a guide to integrate WalletConnect 2.0 into a Vue JS project, you
-            can found open source code
-            <a href="https://github.com/yomi-digital/walletconnect-vue-boilerplate" target="_blank">here</a>.
-        </h3>
-        <h3 class="mt-3">
-            Try the new wallet connect by clicking on the button below.
-        </h3>
-
-        <div class="mt-5">
-            <b-button class="is-primary" @click="openModal()" v-if="!account" style="width: 100%; padding: 10px">
-                Connect
-            </b-button>
-            <div v-if="account !== undefined && account" class="has-text-left box-account mix-gradient mt-6">
-                <div class="is-flex is-align-items-center">
-                    <p class="mr-2 is-medium">
-                        <i class="color-white fa-sharp fa-solid fa-circle-check"></i>
-                    </p>
-                    <p class="color-white is-medium">CONNECTED</p>
-                </div>
-                <p class="color-white is-medium mt-3">
-                    {{ account.substr(0, 6) + "..." + account.substr(-6) }}
-                </p>
-            </div>
-        </div>
+    <div class="md:ml-auto pr-4">
+        <Button @click="openModal()" :label="buttonText" />
     </div>
 </template>
   
@@ -34,8 +10,9 @@ import {
     createClient,
     watchAccount,
     getProvider,
+    getNetwork, getContract, watchNetwork
 } from "@wagmi/core";
-import { goerli, mainnet } from "@wagmi/core/chains";
+import { goerli, filecoinHyperspace } from "@wagmi/core/chains";
 import { Web3Modal } from "@web3modal/html";
 
 import {
@@ -44,6 +21,8 @@ import {
     walletConnectProvider,
 } from "@web3modal/ethereum";
 
+const factoryAbi = require("../abis/mercuryFactory.json");
+
 export default {
     name: "wallet-connect",
     data() {
@@ -51,12 +30,15 @@ export default {
             web3modal: {},
             web3client: {},
             account: "",
+            buttonText: "Connect",
             balance: 0,
+            provider: {},
+            factory: {}
         };
     },
     mounted() {
         const app = this;
-        const chains = [mainnet, goerli];
+        const chains = [goerli, filecoinHyperspace];
         // Wagmi Core Client
         const { provider } = configureChains(chains, [
             walletConnectProvider({
@@ -75,6 +57,7 @@ export default {
             app.web3client
         );
         app.connect();
+        this.provider = provider;
     },
     methods: {
         async openModal() {
@@ -85,13 +68,36 @@ export default {
             const app = this;
             const account = app.web3client.getAccount();
             app.account = account.address;
+
             const provider = getProvider();
             console.log("Provider:", provider);
+
             const signer = provider.getSigner();
             console.log("Signer:", signer);
+
             const balance = await provider.getBalance(app.account);
             app.balance = balance;
             console.log("Balance:", balance.toString());
+
+            this.buttonText = account.address ? account.address.substr(0, 6) + "..." + account.address.substr(-6) : "Connect";
+
+        },
+        async setFactory(network) {
+            let chain = network.id;
+            console.log("network", network)
+            if (chain === 5) {
+                this.factory = getContract({
+                    address: '0x6617514f164E4103706B3183eaF07cC669D6851F',
+                    abi: factoryAbi,
+                    signerOrProvider: this.provider,
+                })
+            } else {
+                this.factory = getContract({
+                    address: '0x6617514f164E4103706B3183eaF07cC669D6851F',
+                    abi: factoryAbi,
+                    signerOrProvider: this.provider,
+                })
+            }
         },
         async connect() {
             const app = this;
@@ -101,7 +107,15 @@ export default {
                 app.readState();
                 console.log(connected)
             });
+
+            let network = getNetwork();
+            this.setFactory(network);
+            watchNetwork((network) => {
+                this.setFactory(network);
+
+            })
         },
     },
+
 };
 </script>
