@@ -7,7 +7,7 @@ class Ethers {
     this.provider = wagmiProvider;
     this.signer = wagmiSigner;
     this.factory = wagmiFactory;
-    this.dataBuyerInstance = "";
+    this.dataBuyerInstance = undefined;
     this.dataBuyer;
     this.address = wagmiSigner.address;
   }

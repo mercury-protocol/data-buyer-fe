@@ -35,7 +35,7 @@ export default {
   methods: {
     async setClick() {
       console.log(this.buyerAddrInput);
-      this.buyerAddrSet = await this.ethers.setDataBuyerInstanceAddress(
+      this.buyerAddrSet = await this.ethersObject.setDataBuyerInstanceAddress(
         this.buyerAddrInput
       );
       if (!this.buyerAddrSet)

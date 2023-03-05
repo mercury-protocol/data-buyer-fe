@@ -3,19 +3,19 @@
         <div class="grid grid-rows-1 grid-cols-2">
             <Header class="mt-2 md:mt-0" />
             <WalletConnect :provider="this.wagmiProvider" :signer="this.wagmiSigner" :factory="this.wagmiFactory"
-                :ethers="this.ethers" />
+                :ethersObject="this.ethersObject" />
         </div>
-        <DataBuyerAddress :ethers="this.ethers" />
-        <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
+        <DataBuyerAddress :ethersObject="this.ethersObject" />
+        <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethersObject="this.ethersObject" />
     </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
-// import Ethers from "../services/ethers";
 import WalletConnect from "@/components/WalletConnect.vue";
 import DataBuyerAddress from "../components/DataBuyerAddress.vue";
 import CreateOrder from "../components/CreateOrder.vue";
+import WagmiClass from "../services/wagmi"
 
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            ethers: Object,
+            ethersObject: Object,
             wagmiProvider: {},
             wagmiSigner: {},
             wagmiFactory: {},
@@ -37,11 +37,6 @@ export default {
     async mounted() {
     },
     methods: {
-        // initEthers() {
-        //     const ethers = new Ethers();
-        //     this.ethers = ethers;
-        // }
-
     }
 }
 </script>

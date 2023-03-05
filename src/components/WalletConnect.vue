@@ -14,14 +14,13 @@ import {
 } from "@wagmi/core";
 import { goerli, filecoinHyperspace } from "@wagmi/core/chains";
 import { Web3Modal } from "@web3modal/html";
-
 import {
     EthereumClient,
     modalConnectors,
     walletConnectProvider,
 } from "@web3modal/ethereum";
-
 const factoryAbi = require("../abis/mercuryFactory.json");
+const ethersObject = require("../services/ethers");
 
 export default {
     name: "wallet-connect",
@@ -34,7 +33,8 @@ export default {
             balance: 0,
             provider: {},
             factory: Object,
-            signer: ''
+            signer: '',
+            ethersObject: Object
         };
     },
     mounted() {
@@ -91,13 +91,13 @@ export default {
                 this.factory = getContract({
                     address: '0x6617514f164E4103706B3183eaF07cC669D6851F',
                     abi: factoryAbi,
-                    signerOrProvider: this.provider,
+                    signerOrProvider: this.provider.address,
                 })
             } else {
                 this.factory = getContract({
                     address: '0x6617514f164E4103706B3183eaF07cC669D6851F',
                     abi: factoryAbi,
-                    signerOrProvider: this.provider,
+                    signerOrProvider: this.provider.address,
                 })
             }
         },
@@ -108,14 +108,20 @@ export default {
             watchAccount((connected) => {
                 app.readState();
                 console.log(connected)
+                this.ethersObject = new ethersObject(this.provider, this.signer, this.factory);
+
             });
 
             let network = getNetwork();
             this.setFactory(network);
             watchNetwork((network) => {
                 this.setFactory(network);
+                this.ethersObject = new ethersObject(this.provider, this.signer, this.factory);
+
 
             })
+
+            this.ethersObject = new ethersObject(this.provider, this.signer, this.factory);
         },
     },
 
