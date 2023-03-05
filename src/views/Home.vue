@@ -3,12 +3,14 @@
         <Header />
         <DataBuyerAddress :ethers="this.ethers" />
         <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
+        <WalletConnect></WalletConnect>
     </div>
 </template>
 
 <script>
 import Header from "../components/Header.vue";
 import Ethers from "../services/ethers";
+import WalletConnect from "@/components/WalletConnect.vue";
 import DataBuyerAddress from "../components/DataBuyerAddress.vue";
 import CreateOrder from "../components/CreateOrder.vue";
 
@@ -19,6 +21,7 @@ export default {
         Header,
         DataBuyerAddress,
         CreateOrder,
+        WalletConnect
     },
     data() {
         return {
