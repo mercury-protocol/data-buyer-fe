@@ -20,11 +20,15 @@ class Cypher {
   }
 
   async checkBalanceEther(_address, requiredTokenBalance) {
-    const res = await window.Cypher({
+    const res = false;
+    await window.Cypher({
       address: _address, // user wallet address
       targetChainIdHex: "0x5", // goerli
       requiredTokenBalance: requiredTokenBalance, // Required: Token Value Required with respect to native currency or token value
       isTestnet: true, // Optional: enable testnet for developer testing
+      callback: (res) => {
+        this.res = res;
+      },
       // requiredTokenContractAddress:
       //   "0x509Ee0d083DdF8AC028f2a56731412edD63223B9",
     });
