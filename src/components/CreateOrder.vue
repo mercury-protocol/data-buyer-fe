@@ -49,20 +49,28 @@ export default {
 
     async createOrder(e) {
       e.preventDefault();
-      try {
-        // const enoughBalanceEther = await this.cypher.checkBalanceEther(this.ethers.address, 0.03);
-        // if (!enoughBalanceEther)
-        //   throw new Error('Not enough balance Ethers');
-        // const enoughBalanceERC20 = await this.cypher.checkBalanceERC20(this.ethers.address, this.price * this.units, '0x509Ee0d083DdF8AC028f2a56731412edD63223B9');
-        // if (!enoughBalanceERC20)
-        //   throw new Error('Not enough balance ERC20');
+      const { chainId } = await this.provider.getNetwork();
+      if (chainId === 5) {
+        try {
+          const enoughBalanceEther = await this.cypher.checkBalanceEther(this.ethers.address, 0.03);
+          if (!enoughBalanceEther)
+            throw new Error('Not enough balance Ethers');
 
-        await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
+          // erc20 testnet tokens not yet implenented. 
+          // We deployed a uniswapV3 pool over at 
+          // const enoughBalanceERC20 = await this.cypher.checkBalanceERC20(this.ethers.address, this.price, '0x509Ee0d083DdF8AC028f2a56731412edD63223B9');
+          // if (!enoughBalanceERC20)
+          //   throw new Error('Not enough balance ERC20');
 
+          await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
+
+        }
+        catch (err) {
+          console.log(err);
+        }
       }
-      catch (err) {
-        console.log(err);
-
+      else {
+        await this.ethers.createOrder(this.selectedDataType, this.price, this.units);
       }
 
     },
