@@ -33,7 +33,8 @@ export default {
             buttonText: "Connect",
             balance: 0,
             provider: {},
-            factory: {}
+            factory: Object,
+            signer: ''
         };
     },
     mounted() {
@@ -58,6 +59,7 @@ export default {
         );
         app.connect();
         this.provider = provider;
+        this.signer = 'signer';
     },
     methods: {
         async openModal() {
@@ -82,7 +84,7 @@ export default {
             this.buttonText = account.address ? account.address.substr(0, 6) + "..." + account.address.substr(-6) : "Connect";
 
         },
-        async setFactory(network) {
+        setFactory(network) {
             let chain = network.id;
             console.log("network", network)
             if (chain === 5) {

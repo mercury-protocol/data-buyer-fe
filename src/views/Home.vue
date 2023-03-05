@@ -2,7 +2,8 @@
     <div class="mt-8 ml-4 mr-4">
         <div class="grid grid-rows-1 grid-cols-2">
             <Header class="mt-2 md:mt-0" />
-            <WalletConnect :provider="this.provider" :signer="this.signer" :ethers="this.ethers" />
+            <WalletConnect :provider="this.wagmiProvider" :signer="this.wagmiSigner" :factory="this.wagmiFactory"
+                :ethers="this.ethers" />
         </div>
         <DataBuyerAddress :ethers="this.ethers" />
         <CreateOrder v-if="this.ethers.dataBuyerInstance != ''" :ethers="this.ethers" />
@@ -11,7 +12,7 @@
 
 <script>
 import Header from "../components/Header.vue";
-import Ethers from "../services/ethers";
+// import Ethers from "../services/ethers";
 import WalletConnect from "@/components/WalletConnect.vue";
 import DataBuyerAddress from "../components/DataBuyerAddress.vue";
 import CreateOrder from "../components/CreateOrder.vue";
@@ -28,17 +29,18 @@ export default {
     data() {
         return {
             ethers: Object,
-            provider: undefined,
-            signer: undefined
+            wagmiProvider: {},
+            wagmiSigner: {},
+            wagmiFactory: {},
         }
     },
     async mounted() {
     },
     methods: {
-        initEthers() {
-            const ethers = new Ethers();
-            this.ethers = ethers;
-        }
+        // initEthers() {
+        //     const ethers = new Ethers();
+        //     this.ethers = ethers;
+        // }
 
     }
 }
